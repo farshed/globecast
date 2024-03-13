@@ -2,6 +2,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { useCallback, useState } from 'react';
 import Map, { Layer, MapLayerMouseEvent, MapRef, Source } from 'react-map-gl';
 import stations from '../constants/stations';
+import { usePlayer } from '../context/player';
 
 const geojsonData = {
 	type: 'FeatureCollection',
@@ -13,9 +14,8 @@ const geojsonData = {
 } as GeoJSON.FeatureCollection;
 
 export default function Planet() {
+	const { selectLocation } = usePlayer();
 	const [cursorStyle, setCursorStyle] = useState('');
-	const [selectedStation, setSelectedStation] = useState<Object | null>(null);
-	const [audio, setAudio] = useState<any>(null);
 
 	const mapRef = useCallback((map: MapRef) => {
 		if (map) {
@@ -24,23 +24,18 @@ export default function Planet() {
 		}
 	}, []);
 
-	const handleStationClick = useCallback(
+	const handleLocationClick = useCallback(
 		(e: MapLayerMouseEvent) => {
 			if (e?.features?.length) {
 				const { properties } = e.features[0];
-				const stations = JSON.parse(properties?.stations);
-				if (stations?.length) {
-					setSelectedStation({ ...properties, station: stations[0] });
-					audio?.pause();
-					const stream = new Audio();
-					stream.src = stations[0].stream;
-					stream.play();
-					setAudio(stream);
-					console.log(stations[0].stream);
-				}
+
+				selectLocation({
+					...properties,
+					stations: JSON.parse(properties?.stations)
+				});
 			}
 		},
-		[audio]
+		[selectLocation]
 	);
 
 	return (
@@ -52,9 +47,10 @@ export default function Planet() {
 				latitude: 40,
 				zoom: 3.5
 			}}
-			onClick={handleStationClick}
+			onClick={handleLocationClick}
 			interactiveLayerIds={['stations']}
 			cursor={cursorStyle}
+			attributionControl={false}
 			mapboxAccessToken="pk.eyJ1IjoiZmFpc2FsYXJzaGVkIiwiYSI6ImNsdG4yaGs0YTAya3YyanA4aWZrbHg0aTEifQ.2fgTovIlzWCkgM9AJdsubg"
 			mapStyle="mapbox://styles/faisalarshed/cltn7xfj500d201qo3ck7g93l">
 			<Source type="geojson" data={geojsonData}>

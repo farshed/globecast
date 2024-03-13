@@ -1,10 +1,14 @@
+import PlayerProvider from './context/player';
 import Planet from './components/Planet';
-import Stations from './components/Stations';
+import Radio from './components/Radio';
 
 export default function App() {
 	return (
-		<div className="h-screen w-screen">
-			<Planet />
-		</div>
+		<PlayerProvider>
+			<div className="h-screen w-screen relative">
+				<Planet />
+				<Radio />
+			</div>
+		</PlayerProvider>
 	);
 }
