@@ -24,3 +24,5 @@ yarn-error.log*
 
 data.json
 stations.ts
+stations.json.gz
+stations-old.json

@@ -1,20 +1,10 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useCallback, useState } from 'react';
 import Map, { Layer, MapLayerMouseEvent, MapRef, Source } from 'react-map-gl';
-import stations from '../constants/stations';
 import { usePlayer } from '../context/player';
 
-const geojsonData = {
-	type: 'FeatureCollection',
-	features: stations.map((station) => ({
-		type: 'Feature',
-		geometry: { type: 'Point', coordinates: station.geo },
-		properties: station
-	}))
-} as GeoJSON.FeatureCollection;
-
 export default function Planet() {
-	const { selectLocation } = usePlayer();
+	const { selectLocation, loading, geoJSONdata } = usePlayer();
 	const [cursorStyle, setCursorStyle] = useState('');
 
 	const mapRef = useCallback((map: MapRef) => {
@@ -28,6 +18,8 @@ export default function Planet() {
 		(e: MapLayerMouseEvent) => {
 			if (e?.features?.length) {
 				const { properties } = e.features[0];
+
+				console.log({ properties });
 
 				selectLocation({
 					...properties,
@@ -53,7 +45,7 @@ export default function Planet() {
 			attributionControl={false}
 			mapboxAccessToken="pk.eyJ1IjoiZmFpc2FsYXJzaGVkIiwiYSI6ImNsdG4yaGs0YTAya3YyanA4aWZrbHg0aTEifQ.2fgTovIlzWCkgM9AJdsubg"
 			mapStyle="mapbox://styles/faisalarshed/cltn7xfj500d201qo3ck7g93l">
-			<Source type="geojson" data={geojsonData}>
+			<Source type="geojson" data={geoJSONdata}>
 				<Layer
 					id="stations"
 					type="circle"
