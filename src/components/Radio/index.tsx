@@ -1,6 +1,7 @@
 import Station from './Station';
 import Clock from './Clock';
 import { usePlayer } from '../../context/player';
+import Controls from './Controls';
 
 export default function Radio() {
 	const { location, station } = usePlayer();
@@ -12,17 +13,23 @@ export default function Radio() {
 	const { stations, title, country, utcOffset } = location;
 
 	return (
-		<div className="absolute bottom-4 right-4 w-80 h-96 bg-slate-900 rounded-md">
-			<div className="flex flex-row justify-between">
-				<p className="p-4 font-bold text-white">
-					{title}, {country}
-				</p>
-				<Clock utcOffset={utcOffset} />
+		<div className="absolute bottom-4 right-4">
+			<div className="absolute bottom-14 right-0 w-80 max-h-96 p-2 bg-slate-900 rounded-sm">
+				<div className="flex flex-row justify-between">
+					<p className="p-4 font-bold text-white">
+						{title}, {country}
+					</p>
+					<Clock utcOffset={utcOffset} />
+				</div>
+
+				{stations.map((s: any) => (
+					<Station key={s.id} station={s} playing={s.id === station.id} />
+				))}
 			</div>
 
-			{stations.map((s: any) => (
-				<Station key={s.id} station={s} playing={s.id === station.id} />
-			))}
+			<div className="absolute bottom-0 right-0 w-80 h-12 bg-slate-900 rounded-sm">
+				<Controls />
+			</div>
 		</div>
 	);
 }

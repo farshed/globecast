@@ -12,12 +12,14 @@ import { fetchData, formatAsGeoJSON } from '../utils';
 type PlayerContextType = {
 	station: any;
 	location: any;
+	loading: boolean;
+	playing: boolean;
+	volume: number;
+	geoJSONdata: GeoJSON.FeatureCollection;
 	selectStation: Function;
 	selectLocation: Function;
 	togglePlayback: Function;
-	loading: boolean;
-	playing: boolean;
-	geoJSONdata: GeoJSON.FeatureCollection;
+	changeVolume: Function;
 };
 
 const PlayerContext = createContext<PlayerContextType>({} as PlayerContextType);
@@ -30,6 +32,7 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 	const [station, setStation] = useState<any>(null);
 	const [loading, setLoading] = useState(true);
 	const [playing, setPlaying] = useState(false);
+	const [volume, setVolume] = useState(100);
 
 	useEffect(() => {
 		console.log('hello');
@@ -46,6 +49,7 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 				stream.src = newStation.stream;
 				stream.load();
 				stream.play();
+				setPlaying(true);
 			}
 		},
 		[station]
@@ -63,9 +67,14 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 
 	const value = useMemo(() => {
 		const togglePlayback = () => {
-			const isPlaying = !stream.paused && stream.currentTime > 0 && !stream.ended;
-			isPlaying ? stream.pause() : stream.play();
-			setPlaying(isPlaying);
+			// const isPlaying = !stream.paused && stream.currentTime > 0 && !stream.ended;
+			playing ? stream.pause() : stream.play();
+			setPlaying(!playing);
+		};
+
+		const changeVolume = (vol: number) => {
+			stream.volume = vol / 100;
+			setVolume(vol);
 		};
 
 		return {
@@ -76,9 +85,11 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 			loading,
 			playing,
 			geoJSONdata,
-			togglePlayback
+			togglePlayback,
+			volume,
+			changeVolume
 		};
-	}, [station, location, selectStation, selectLocation, loading, playing]);
+	}, [station, location, selectStation, selectLocation, loading, playing, volume]);
 
 	return <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>;
 }
