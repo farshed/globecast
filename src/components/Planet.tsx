@@ -19,8 +19,6 @@ export default function Planet() {
 			if (e?.features?.length) {
 				const { properties } = e.features[0];
 
-				console.log({ properties });
-
 				selectLocation({
 					...properties,
 					stations: JSON.parse(properties?.stations)

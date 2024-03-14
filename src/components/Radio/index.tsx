@@ -1,6 +1,6 @@
 import Station from './Station';
 import Clock from './Clock';
-import { usePlayer } from '../context/player';
+import { usePlayer } from '../../context/player';
 
 export default function Radio() {
 	const { location, station } = usePlayer();

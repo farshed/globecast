@@ -14,7 +14,9 @@ type PlayerContextType = {
 	location: any;
 	selectStation: Function;
 	selectLocation: Function;
+	togglePlayback: Function;
 	loading: boolean;
+	playing: boolean;
 	geoJSONdata: GeoJSON.FeatureCollection;
 };
 
@@ -27,6 +29,7 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 	const [location, setLocation] = useState<any>(null);
 	const [station, setStation] = useState<any>(null);
 	const [loading, setLoading] = useState(true);
+	const [playing, setPlaying] = useState(false);
 
 	useEffect(() => {
 		console.log('hello');
@@ -35,8 +38,6 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 			setLoading(false);
 		});
 	}, []);
-
-	console.log({ location, station });
 
 	const selectStation = useCallback(
 		(newStation: any) => {
@@ -61,15 +62,23 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 	);
 
 	const value = useMemo(() => {
+		const togglePlayback = () => {
+			const isPlaying = !stream.paused && stream.currentTime > 0 && !stream.ended;
+			isPlaying ? stream.pause() : stream.play();
+			setPlaying(isPlaying);
+		};
+
 		return {
 			station,
 			location,
 			selectStation,
 			selectLocation,
 			loading,
-			geoJSONdata
+			playing,
+			geoJSONdata,
+			togglePlayback
 		};
-	}, [station, location, selectStation, selectLocation, loading]);
+	}, [station, location, selectStation, selectLocation, loading, playing]);
 
 	return <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>;
 }

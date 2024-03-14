@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { usePlayer } from '../context/player';
+import { usePlayer } from '../../context/player';
 
 interface StationProps {
 	station: any;
