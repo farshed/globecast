@@ -4,7 +4,7 @@ export default function Controls() {
 	const { playing, togglePlayback, volume, changeVolume } = usePlayer();
 
 	return (
-		<div className="absolute bottom-0 left-0 right-0 h-12 flex flex-row justify-center items-center">
+		<div className="absolute bottom-0 left-0 right-0 h-12 flex flex-row justify-evenly items-center">
 			<div
 				className="cursor-pointer hover:bg-slate-800 p-2 rounded-lg"
 				onClick={() => togglePlayback()}>
@@ -14,9 +14,10 @@ export default function Controls() {
 			<input
 				type="range"
 				min={0}
-				max={100}
+				max={1}
+				step="any"
 				value={volume}
-				onChange={(e) => changeVolume(parseInt(e.target.value))}
+				onChange={(e) => changeVolume(e.target.value)}
 			/>
 		</div>
 	);

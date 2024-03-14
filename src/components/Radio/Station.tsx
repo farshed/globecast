@@ -12,7 +12,7 @@ export default function Station({ station, playing }: StationProps) {
 	return (
 		<div
 			className={cx(
-				'w-full flex p-4 py-3 cursor-pointer hover:bg-slate-800',
+				'w-full flex p-4 py-3 cursor-pointer hover:bg-slate-800 rounded-sm',
 				playing && 'bg-slate-800'
 			)}
 			onClick={() => selectStation(station)}>

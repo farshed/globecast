@@ -73,7 +73,7 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 		};
 
 		const changeVolume = (vol: number) => {
-			stream.volume = vol / 100;
+			stream.volume = vol;
 			setVolume(vol);
 		};
 
