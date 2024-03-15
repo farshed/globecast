@@ -17,3 +17,48 @@ code {
 .mapboxgl-ctrl-logo {
 	display: none !important;
 }
+
+#volume-ctrl {
+	--fill-color: #00ff00;
+	-webkit-appearance: none;
+	appearance: none;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+	outline: none;
+	border-radius: 16px;
+}
+
+#volume-ctrl::-webkit-slider-runnable-track {
+	height: 4px;
+	background: #ccc;
+	border-radius: 16px;
+}
+
+#volume-ctrl::-moz-range-track {
+	height: 4px;
+	background: #ccc;
+	border-radius: 16px;
+}
+
+#volume-ctrl::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 0px;
+	width: 0px;
+	background-color: #fff;
+	border-radius: 50%;
+	/* border: 2px solid var(--fill-color); */
+	box-shadow: -1000px 0 0 1000px var(--fill-color);
+}
+
+#volume-ctrl::-moz-range-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 0px;
+	width: 0px;
+	background-color: #fff;
+	border-radius: 50%;
+	/* border: 2px solid var(--fill-color); */
+	box-shadow: -1000px 0 0 1000px var(--fill-color);
+}

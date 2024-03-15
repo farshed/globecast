@@ -3,6 +3,8 @@
 ### Todo
 
 -  [ ] Playback controls: Play, pause, change volume.
+-  [ ] Reflect current state in url for bookmarking.
+-  [ ] Preserve settings across reloads.
 -  [ ] Move to user's location on first load and then last played station's location on subsequent loads.
 -  [ ] Display currently playing station and handle inaccessible stations.
 -  [ ] Handle stream failures.

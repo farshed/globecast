@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import clsx from 'clsx';
 import { usePlayer } from '../../context/player';
 
 interface StationProps {
@@ -11,12 +11,12 @@ export default function Station({ station, playing }: StationProps) {
 
 	return (
 		<div
-			className={cx(
-				'w-full flex p-4 py-3 cursor-pointer hover:bg-slate-800 rounded-sm',
-				playing && 'bg-slate-800'
+			className={clsx(
+				'w-full flex p-4 py-3 cursor-pointer hover:bg-slate-800 rounded-sm'
+				// playing && 'bg-slate-800'
 			)}
 			onClick={() => selectStation(station)}>
-			<p className="text-white">{station.title}</p>
+			<p className={clsx('text-white line-clamp-1', playing && 'text-neon')}>{station.title}</p>
 		</div>
 	);
 }

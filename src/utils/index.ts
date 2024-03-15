@@ -64,3 +64,18 @@ function hash(str: string) {
 	}
 	return hash;
 }
+
+function generateHash(str: string): string {
+	if (str.length === 0) return '0';
+
+	let hash = 0;
+	let char;
+
+	for (let i = 0; i < str.length; i++) {
+		char = str.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash &= hash;
+	}
+
+	return Math.abs(hash).toString(36);
+}

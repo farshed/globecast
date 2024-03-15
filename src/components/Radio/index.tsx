@@ -15,8 +15,8 @@ export default function Radio() {
 	return (
 		<div className="absolute bottom-4 right-4">
 			<div className="absolute bottom-14 right-0 w-80 max-h-96 p-2 bg-slate-900 rounded-sm">
-				<div className="flex flex-row justify-between">
-					<p className="p-4 font-bold text-white">
+				<div className="p-4 flex flex-row justify-between items-center">
+					<p className="font-bold text-white line-clamp-2">
 						{title}, {country}
 					</p>
 					<Clock utcOffset={utcOffset} />
