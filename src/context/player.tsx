@@ -42,7 +42,9 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 	// 	});
 	// }, []);
 
-	useEffect(() => {});
+	useEffect(() => {
+		// set location and station
+	}, []);
 
 	useEffect(() => {
 		if (location && station) {
