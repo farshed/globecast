@@ -9,34 +9,34 @@ export default function Planet() {
 
 	const mapRef = useCallback((map: MapRef) => {
 		if (map) {
-			map.on('mouseover', 'data-8spf3l', () => setCursorStyle('pointer'));
-			map.on('mouseleave', 'data-8spf3l', () => setCursorStyle(''));
-			map.on('click', 'data-8spf3l', (e) => {
-				if (e?.features?.length) {
-					const { properties } = e.features[0];
-
-					selectLocation({
-						...properties,
-						stations: JSON.parse(properties?.stations)
-					});
-				}
-			});
+			map.on('mouseover', 'stations', () => setCursorStyle('pointer'));
+			map.on('mouseleave', 'stations', () => setCursorStyle(''));
+			// map.on('click', 'stations', function (e) {
+			// 	console.log(e);
+			// 	if (e?.features?.length) {
+			// 		const { properties } = e.features[0];
+			// 		selectLocation({
+			// 			...properties,
+			// 			stations: JSON.parse(properties?.stations)
+			// 		});
+			// 	}
+			// });
 		}
 	}, []);
 
-	// const handleLocationClick = useCallback(
-	// 	(e: MapLayerMouseEvent) => {
-	// 		if (e?.features?.length) {
-	// 			const { properties } = e.features[0];
+	const handleLocationClick = useCallback(
+		(e: MapLayerMouseEvent) => {
+			if (e?.features?.length) {
+				const { properties } = e.features[0];
 
-	// 			selectLocation({
-	// 				...properties,
-	// 				stations: JSON.parse(properties?.stations)
-	// 			});
-	// 		}
-	// 	},
-	// 	[selectLocation]
-	// );
+				selectLocation({
+					...properties,
+					stations: JSON.parse(properties?.stations)
+				});
+			}
+		},
+		[selectLocation]
+	);
 
 	return (
 		<Map
@@ -48,7 +48,7 @@ export default function Planet() {
 				zoom: 3.5
 			}}
 			// onZoom={(e) => console.log(e.target.getLayer('data-8spf3l'))}
-			// onClick={handleLocationClick}
+			onClick={handleLocationClick}
 			// onMou={(e) => console.log(e.features)}
 			interactiveLayerIds={['stations']}
 			cursor={cursorStyle}

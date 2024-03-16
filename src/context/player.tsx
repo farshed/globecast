@@ -34,13 +34,28 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 	const [playing, setPlaying] = useState(false);
 	const [volume, setVolume] = useState(100);
 
+	// useEffect(() => {
+	// 	console.log('hello');
+	// 	fetchData().then((data) => {
+	// 		geoJSONdata = formatAsGeoJSON(data);
+	// 		setLoading(false);
+	// 	});
+	// }, []);
+
+	useEffect(() => {});
+
 	useEffect(() => {
-		console.log('hello');
-		fetchData().then((data) => {
-			geoJSONdata = formatAsGeoJSON(data);
-			setLoading(false);
-		});
-	}, []);
+		if (location && station) {
+			const stationExists = location.stations.some(({ id }: any) => id === station.id);
+			if (stationExists) {
+				window.history.pushState(
+					null,
+					station.title,
+					[document.location.origin, location.id, station.id].join('/')
+				);
+			}
+		}
+	}, [location, station]);
 
 	const selectStation = useCallback(
 		(newStation: any) => {
@@ -64,8 +79,6 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 		},
 		[location, selectStation]
 	);
-
-	console.log(geoJSONdata);
 
 	const value = useMemo(() => {
 		const togglePlayback = () => {
