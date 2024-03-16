@@ -65,6 +65,8 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 		[location, selectStation]
 	);
 
+	console.log(geoJSONdata);
+
 	const value = useMemo(() => {
 		const togglePlayback = () => {
 			// const isPlaying = !stream.paused && stream.currentTime > 0 && !stream.ended;

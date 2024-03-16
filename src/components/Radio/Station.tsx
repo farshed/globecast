@@ -16,7 +16,9 @@ export default function Station({ station, playing }: StationProps) {
 				// playing && 'bg-slate-800'
 			)}
 			onClick={() => selectStation(station)}>
-			<p className={clsx('text-white line-clamp-1', playing && 'text-neon')}>{station.title}</p>
+			<p className={clsx('line-clamp-1', playing ? 'text-neon' : 'text-white')}>
+				{station.title}
+			</p>
 		</div>
 	);
 }
