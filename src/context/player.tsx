@@ -65,7 +65,7 @@ export default function PlayerProvider({ children }: { children: ReactNode }) {
 				setStation(newStation);
 				stream.src = newStation.stream;
 				stream.load();
-				stream.play();
+				stream.play().catch(() => {});
 				setPlaying(true);
 			}
 		},

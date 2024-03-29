@@ -9,7 +9,6 @@ export default function Clock({ utcOffset }: ClockProps) {
 
 	useEffect(() => {
 		const interval = setInterval(() => setTime(Date.now()), 1e3);
-
 		return () => clearInterval(interval);
 	}, []);
 
