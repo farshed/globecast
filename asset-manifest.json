@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/globecast/static/css/main.9e0f361d.css",
+    "main.js": "/globecast/static/js/main.620be5a2.js",
+    "static/js/879.077bb16e.chunk.js": "/globecast/static/js/879.077bb16e.chunk.js",
+    "index.html": "/globecast/index.html",
+    "main.9e0f361d.css.map": "/globecast/static/css/main.9e0f361d.css.map",
+    "main.620be5a2.js.map": "/globecast/static/js/main.620be5a2.js.map",
+    "879.077bb16e.chunk.js.map": "/globecast/static/js/879.077bb16e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e0f361d.css",
+    "static/js/main.620be5a2.js"
+  ]
+}
