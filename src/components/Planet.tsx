@@ -26,7 +26,7 @@ export default function Planet() {
 			});
 
 			map.on('mouseleave', INTERACTIVE_LAYER_ID, () => {
-				setHovered(null);
+				// setHovered(null);
 				setCursorStyle('');
 			});
 			// map.on('click', 'stations', function (e) {
@@ -109,7 +109,7 @@ function HoverOverlay({ radioGroup }: { radioGroup: RadioGroup }) {
 
 	return (
 		<Marker latitude={latitude} longitude={longitude}>
-			<div className="p-3 bg-slate-900 opacity-80 rounded-sm text-white">
+			<div className="p-2 mb-28 rounded-sm bg-slate-900/50 text-white backdrop-blur">
 				<p>
 					{title}, {country}
 				</p>
