@@ -25,8 +25,8 @@ export default function Planet() {
 				setCursorStyle('pointer');
 			});
 
-			map.on('mouseleave', INTERACTIVE_LAYER_ID, () => {
-				// setHovered(null);
+			map.on('mouseleave', INTERACTIVE_LAYER_ID, (e) => {
+				setHovered(null);
 				setCursorStyle('');
 			});
 			// map.on('click', 'stations', function (e) {
