@@ -1,4 +1,4 @@
-# RadioPlanet
+# Globecast
 
 ### Todo
 

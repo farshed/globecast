@@ -1,7 +1,7 @@
 {
 	"name": "radio-planet",
 	"version": "0.1.0",
-	"homepage": "https://globecast.farshed.me",
+	"homepage": "https://globecast.farshed.github.io",
 	"private": true,
 	"dependencies": {
 		"clsx": "^2.1.0",
